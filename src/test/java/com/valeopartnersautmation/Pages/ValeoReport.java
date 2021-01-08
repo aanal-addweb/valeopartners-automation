@@ -123,7 +123,7 @@ public class ValeoReport {
     public void checkGraph() throws InterruptedException, IOException {
         ActionClass actionClass = new ActionClass(this.driver, extentTest);
         Thread.sleep(2000);
-        driver.get("https://dev.reports.valeopartners.com/visual/test-report-3");
+        driver.get("https://dev.reports.valeopartners.com/visual/test-report-automation");
         Thread.sleep(5000);
 
         Boolean isGraph = driver.findElement(By.xpath("//*[@id=\"block-visualchartdisplay\"]/div[2]/div")).isDisplayed();
@@ -200,7 +200,7 @@ public class ValeoReport {
         pojo.setReportrateyear(report_rate_year);
 
 //      Graph
-        driver.get("https://dev.reports.valeopartners.com/visual/test-report-3");
+        driver.get("https://dev.reports.valeopartners.com/visual/test-report-automation");
         Thread.sleep(3000);
         Boolean isGraph = driver.findElement(By.xpath("//*[@id=\"block-visualchartdisplay\"]/div[2]/div")).isDisplayed();
         if (isGraph = true) {
