@@ -12,6 +12,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.List;
 
@@ -108,7 +110,7 @@ public class ValeoReport {
     public void login() throws InterruptedException, IOException {
         ActionClass actionClass = new ActionClass(this.driver,extentTest);
         Thread.sleep(2000);
-        driver.get(url);
+        driver.getCurrentUrl();
         actionClass.setValueinTextbox(username_field, uname);
         Thread.sleep(3000);
         actionClass.setValueinTextbox(password_field, pass);
@@ -117,28 +119,33 @@ public class ValeoReport {
         Thread.sleep(5000);
         VerificationClass verificationClass = new VerificationClass(driver, extentTest);
         verificationClass.verifyTextPresent(logout_text, "Log out");
-        actionClass.captureScreen("Login");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
+        Thread.sleep(2000);
+        actionClass.entirePageScreenshot("Login");
     }
 
-    public void checkGraph() throws InterruptedException, IOException {
+    public void checkGraph(String graphURL) throws InterruptedException, IOException {
         ActionClass actionClass = new ActionClass(this.driver, extentTest);
         Thread.sleep(2000);
-        driver.get("https://dev.reports.valeopartners.com/visual/test-report-automation");
+        driver.get(graphURL);
         Thread.sleep(5000);
-
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
         Boolean isGraph = driver.findElement(By.xpath("//*[@id=\"block-visualchartdisplay\"]/div[2]/div")).isDisplayed();
         if (isGraph = true) {
             extentTest.log(Status.PASS, "Graph is displayed");
             System.out.println("Graph is displayed");
-            actionClass.captureScreen("GraphCheck");
+            actionClass.entirePageScreenshot("Graph Check");
         } else {
             extentTest.log(Status.FAIL, "Graph is not displayed");
             System.out.println("Graph not displayed");
-            actionClass.captureScreen("GraphCheck");
+            Thread.sleep(2000);
+            actionClass.entirePageScreenshot("Graph Full Page SS");
         }
     }
 
-    public void getReportData(String Firm, String rate_year, String rate_selection, String position) throws InterruptedException, IOException {
+    public void getReportData(String Firm, String rate_year, String rate_selection, String position, String graphURL) throws InterruptedException, IOException, AWTException {
 
         //Report
         ActionClass actionClass = new ActionClass(this.driver, extentTest);
@@ -160,21 +167,34 @@ public class ValeoReport {
         actionClass.clickOnObject(this.FromYearSelect);
         System.out.println("selectposition1");
         Thread.sleep(2000);
-//        actionClass.clickOnObject(this.ToyearSearch);
         actionClass.setValueinTextbox(this.ToyearSearch,rate_year);
         actionClass.clickOnObject(this.Toyearselect);
         System.out.println("selectposition");
-        actionClass.captureScreen("Filter selection");
         actionClass.clickOnObject(this.SearchBtn);
-        Thread.sleep(4000);
-        jsetaskscore.executeScript("scrollBy(0,450)");
-        actionClass.captureScreen("Report-1");
-        Thread.sleep(1000);
-        jsetaskscore.executeScript("window.scrollBy(600,0)");
-        actionClass.captureScreen("Report-2");
+        Thread.sleep(3000);
+        Robot robot = new Robot();
+        System.out.println("About to zoom out");
+        for (int i = 0; i < 4; i++) {
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_SUBTRACT);
+            robot.keyRelease(KeyEvent.VK_SUBTRACT);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
+        Thread.sleep(5000);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
+        Thread.sleep(2000);
+        actionClass.entirePageScreenshot("Report Full Page SS");
+        System.out.println("About to zoom in");
+        for (int i = 0; i < 4; i++) {
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_ADD);
+            robot.keyRelease(KeyEvent.VK_ADD);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
+        Thread.sleep(5000);
 
         POJO pojo = new POJO();
-
         String graduation_year = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[4]/table/tbody/tr[1]/td[12]")).getText();
         graduation_year.trim();
         if(graduation_year.isEmpty()){
@@ -200,7 +220,7 @@ public class ValeoReport {
         pojo.setReportrateyear(report_rate_year);
 
 //      Graph
-        driver.get("https://dev.reports.valeopartners.com/visual/test-report-automation");
+        driver.get(graphURL);
         Thread.sleep(3000);
         Boolean isGraph = driver.findElement(By.xpath("//*[@id=\"block-visualchartdisplay\"]/div[2]/div")).isDisplayed();
         if (isGraph = true) {
@@ -242,9 +262,14 @@ public class ValeoReport {
                     break;
                 }
             }
+            js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
+            actionClass.entirePageScreenshot("Graph is displayed");
         }else {
             extentTest.log(Status.FAIL, "Graph is not displayed");
             System.out.println("Graph not displayed");
+            Thread.sleep(2000);
+            js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
+            actionClass.entirePageScreenshot("Graph not displayed SS");
         }
     }
 }

@@ -4,7 +4,11 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
+import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
@@ -165,19 +169,6 @@ public class ActionClass {
         }
     }
 
-    public static void captureScreen(String testcaseName) throws IOException {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
-        Date date = new Date();
-        String datetextName = dateFormat.format(date);
-        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
-        TakesScreenshot scrShot = ((TakesScreenshot) driver);
-        File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
-        File DestFile = new File(screenshotPath);
-        FileUtils.copyFile(SrcFile, DestFile);
-        test.addScreenCaptureFromPath(screenshotPath);
-
-    }
-
     public void updateValueinTextbox( WebElement element, String value)    {
         try {
             if(element.isDisplayed())
@@ -223,6 +214,30 @@ public class ActionClass {
             test.log(Status.FAIL,e.getMessage());
         }
     }
+    public static void captureScreen(String testcaseName) throws IOException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
+        Date date = new Date();
+        String datetextName = dateFormat.format(date);
+        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
+        TakesScreenshot scrShot = ((TakesScreenshot) driver);
+        File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+        File DestFile = new File(screenshotPath);
+        FileUtils.copyFile(SrcFile, DestFile);
+        test.addScreenCaptureFromPath(screenshotPath);
+    }
 
+    public void entirePageScreenshot(String testcaseName) throws IOException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
+        Date date = new Date();
+        String datetextName = dateFormat.format(date);
+        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
+        Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
+        try {
+            test.addScreenCaptureFromPath(screenshotPath);
+            ImageIO.write(screenshot.getImage(),"PNG",new File(screenshotPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

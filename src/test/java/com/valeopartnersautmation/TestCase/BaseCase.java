@@ -19,7 +19,7 @@ public class BaseCase extends ReportClass {
 //        driver.get(constantVars.url);
 //        driver.manage().window().maximize();
 
-//        headless
+        headless
         System.setProperty("Webdriver.chrome.driver", System.getProperty("user.dir") + "chromedriver");
         ChromeOptions options = new ChromeOptions();
         // options.setExperimentalOption("useAutomationExtension", false);
@@ -30,11 +30,8 @@ public class BaseCase extends ReportClass {
         options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
         options.addArguments("--no-sandbox");
         driver = new ChromeDriver(options);
-//        driver = new ChromeDriver();
-        driver.get("https://valeodev:F0rD3v0nly!@dev.reports.valeopartners.com/");
-//      CommonVar constantVars = new CommonVar();
-//      driver.get("https://valeodev:F0rD3v0nly!@dev.reports.valeopartners.com/");
+        CommonVars constantVars = new CommonVars();
+        driver.get(constantVars.url);
         driver.manage().window().maximize();
-        System.out.println("Title of the page is -> " + driver.getTitle());
     }
 }
