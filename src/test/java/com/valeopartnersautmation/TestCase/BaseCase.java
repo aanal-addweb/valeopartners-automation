@@ -19,7 +19,7 @@ public class BaseCase extends ReportClass {
 //        driver.get(constantVars.url);
 //        driver.manage().window().maximize();
 
-        headless
+//        headless
         System.setProperty("Webdriver.chrome.driver", System.getProperty("user.dir") + "chromedriver");
         ChromeOptions options = new ChromeOptions();
         // options.setExperimentalOption("useAutomationExtension", false);
