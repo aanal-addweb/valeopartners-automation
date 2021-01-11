@@ -4,10 +4,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.valeopartnersautmation.Actions.ActionClass;
 import com.valeopartnersautmation.Actions.VerificationClass;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
@@ -172,26 +169,26 @@ public class ValeoReport {
         System.out.println("selectposition");
         actionClass.clickOnObject(this.SearchBtn);
         Thread.sleep(3000);
-        Robot robot = new Robot();
-        System.out.println("About to zoom out");
-        for (int i = 0; i < 4; i++) {
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_SUBTRACT);
-            robot.keyRelease(KeyEvent.VK_SUBTRACT);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-        }
+//        Robot robot = new Robot();
+//        System.out.println("About to zoom out");
+//        for (int i = 0; i < 4; i++) {
+//            robot.keyPress(KeyEvent.VK_CONTROL);
+//            robot.keyPress(KeyEvent.VK_SUBTRACT);
+//            robot.keyRelease(KeyEvent.VK_SUBTRACT);
+//            robot.keyRelease(KeyEvent.VK_CONTROL);
+//        }
         Thread.sleep(5000);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
         Thread.sleep(2000);
         actionClass.entirePageScreenshot("Report Full Page SS");
-        System.out.println("About to zoom in");
-        for (int i = 0; i < 4; i++) {
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_ADD);
-            robot.keyRelease(KeyEvent.VK_ADD);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-        }
+//        System.out.println("About to zoom in");
+//        for (int i = 0; i < 4; i++) {
+//            robot.keyPress(KeyEvent.VK_CONTROL);
+//            robot.keyPress(KeyEvent.VK_ADD);
+//            robot.keyRelease(KeyEvent.VK_ADD);
+//            robot.keyRelease(KeyEvent.VK_CONTROL);
+//        }
         Thread.sleep(5000);
 
         POJO pojo = new POJO();
