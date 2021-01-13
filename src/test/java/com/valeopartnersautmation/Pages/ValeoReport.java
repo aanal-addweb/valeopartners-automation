@@ -310,7 +310,6 @@ public class ValeoReport {
         System.out.println("selectposition");
         actionClass.clickOnObject(this.SearchBtn);
         Thread.sleep(3000);
-
         //get number of results
         String sentence = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[2]")).getText();
         String[] sentence2 = sentence.split(" ");
