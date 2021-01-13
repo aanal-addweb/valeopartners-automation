@@ -4,6 +4,11 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.valeopartnersautmation.Actions.ActionClass;
 import com.valeopartnersautmation.Actions.VerificationClass;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -11,7 +16,12 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.valeopartnersautmation.Constants.CommonVars.*;
@@ -96,6 +106,17 @@ public class ValeoReport {
             using = " //*[@id=\"edit-submit-search-rates-by-firm-detail\"]")
     private WebElement SearchBtn;
 
+    @FindBy(how = How.XPATH,
+            using = "//*[@id=\"export-xls-link\"]/a")
+    private WebElement ExportExcel;
+
+    @FindBy(how = How.XPATH,
+            using = "//*[@id=\"xlsModal\"]")
+    private WebElement FrameModal;
+
+    @FindBy(how = How.XPATH,
+            using = "/html/body/div[6]/div[11]/div/button")
+    private WebElement ClickOnAccept;
 
 
     public ValeoReport(WebDriver driver, ExtentTest test){
@@ -143,7 +164,6 @@ public class ValeoReport {
     }
 
     public void getReportData(String Firm, String rate_year, String rate_selection, String position, String graphURL) throws InterruptedException, IOException, AWTException {
-
         //Report
         ActionClass actionClass = new ActionClass(this.driver, extentTest);
         Thread.sleep(2000);
@@ -268,5 +288,70 @@ public class ValeoReport {
             js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
             actionClass.entirePageScreenshot("Graph not displayed SS");
         }
+    }
+
+    public File matchExcelData(String Firm, String rate_year, String rate_selection, String position, String graphURL, String dirPath, String filePath, String sheetName) throws InterruptedException, IOException {
+        ActionClass actionClass = new ActionClass(this.driver, extentTest);
+        Thread.sleep(2000);
+        driver.get("https://dev.reports.valeopartners.com/rates/report");
+        Thread.sleep(3000);
+        actionClass.setValueinTextbox(this.FirmField,Firm);
+        actionClass.clickOnObject(this.Optionselect);
+        Thread.sleep(2000);
+        actionClass.clickOnObject(this.Position);
+        Thread.sleep(2000);
+        actionClass.clickOnObject(this.SelectPosition);
+        Thread.sleep(2000);
+        System.out.println("selectposition");
+        JavascriptExecutor jsetaskscore = (JavascriptExecutor) driver;
+        jsetaskscore.executeScript("scrollBy(0,350)");
+        actionClass.clickOnObject(this.FromYear);
+        actionClass.setValueinTextbox(this.Searchbox,rate_year);
+        actionClass.clickOnObject(this.FromYearSelect);
+        System.out.println("selectposition1");
+        Thread.sleep(2000);
+        actionClass.setValueinTextbox(this.ToyearSearch,rate_year);
+        actionClass.clickOnObject(this.Toyearselect);
+        System.out.println("selectposition");
+        actionClass.clickOnObject(this.SearchBtn);
+        Thread.sleep(3000);
+
+        //get number of result
+        String sentence = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[2]")).getText();
+        String[] sentence2 = sentence.split(" ");
+        String result1= sentence2[5].trim();
+        System.out.println(result1);
+
+//        export excel and get number of result
+        actionClass.clickOnObject(ExportExcel);
+        Thread.sleep(3000);
+        driver.switchTo().activeElement();
+        Thread.sleep(5000);
+        driver.findElement(By.xpath("/html/body/div[6]/div[3]/div")).click();
+        Thread.sleep(3000);
+        File dir = new File(dirPath);
+        File[] files = dir.listFiles();
+        if (files == null || files.length == 0) {
+            return null;
+        }
+        File lastModifiedFile = files[0];
+        for (int i = 1; i < files.length; i++) {
+            if (lastModifiedFile.lastModified() < files[i].lastModified()) {
+                lastModifiedFile = files[i];
+            }
+        }
+        FileInputStream fis = null;
+        XSSFWorkbook workbook = null;
+        XSSFRow row = null;
+        XSSFCell cell = null;
+        String xlFilePath;
+        fis = new FileInputStream(lastModifiedFile);
+        workbook = new  XSSFWorkbook(fis);
+        XSSFSheet sheet = workbook.getSheet(sheetName);
+        int rowCount = sheet.getLastRowNum();
+        String result2 =String.valueOf(rowCount);
+        System.out.println(result2);
+        actionClass.CompareString(result1, result2);//Compare Number of displayed result with exported excel sheet
+        return lastModifiedFile;
     }
 }

@@ -129,19 +129,19 @@ public class ActionClass {
             test.log(Status.FAIL,e.getMessage());
         }
     }
-    public void CompareEditedString(ArrayList<String> listNames, ArrayList<String> listNames1)
+    public void CompareString(String string1, String string2)
     {
         try {
-            if(listNames.equals(listNames1)==false)
+            if(string1.equals(string2)==true)
             {
-                test.log(Status.INFO,"Record edited successfully and before and after database values does not match");
-                System.out.println("Record edited successfully and before and after database values does not match");
+                test.log(Status.PASS,"Number of displayed result matches with exported excel sheet");
+                System.out.println("Number of displayed result matches with exported excel sheet");
 
             }
             else
             {
-                System.out.println("Record edited successfully and before and after database values matches");
-                test.log(Status.FAIL,"Record did not edit successfully and before and after database values matches");
+                System.out.println("Number of displayed result does not match with exported excel sheet");
+                test.log(Status.FAIL,"Number of displayed result does not match with exported excel sheet");
             }
         }
         catch (Exception e)
