@@ -317,7 +317,7 @@ public class ValeoReport {
         String result1= sentence2[5].trim();
         System.out.println(result1);
 
-//        export excel and get number of result
+//      export excel and get number of result
         actionClass.clickOnObject(ExportExcel);
         Thread.sleep(3000);
         driver.switchTo().activeElement();
