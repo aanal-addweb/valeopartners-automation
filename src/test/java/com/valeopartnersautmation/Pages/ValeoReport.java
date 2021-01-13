@@ -311,7 +311,7 @@ public class ValeoReport {
         actionClass.clickOnObject(this.SearchBtn);
         Thread.sleep(3000);
 
-        //get number of result
+        //get number of results
         String sentence = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[2]")).getText();
         String[] sentence2 = sentence.split(" ");
         String result1= sentence2[5].trim();
