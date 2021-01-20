@@ -18,7 +18,7 @@ public class TestValeoReport extends BaseCase{
     public void graphCheck() throws IOException, InterruptedException {
         logger = extent.createTest("Check if the graph is present on the Graph page");
         ValeoReport valeoReport = new ValeoReport(driver, logger);
-        valeoReport.checkGraph("https://dev.reports.valeopartners.com/visual/test-report-automation");
+        valeoReport.checkGraph("https://dev.reports.valeopartners.com/visual/test-report-automation-graph-not-displayed");
     }
 
     @Test(priority = 3)
