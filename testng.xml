@@ -7,6 +7,7 @@
             <class name="com.valeopartnersautmation.TestCase.BaseCase"/>
             <class name="com.valeopartnersautmation.TestCase.TestValeoReport"/>
             <class name="com.valeopartnersautmation.TestCase.TestValeoReport"/>
+
         </classes>
     </test>
 </suite>
