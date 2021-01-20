@@ -17,7 +17,6 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -67,6 +66,7 @@
       <version>2.6</version>
       <scope>test</scope>
     </dependency>
+    
     <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
@@ -79,6 +79,7 @@
       <version>0.9.7376</version>
       <scope>test</scope>
     </dependency>
+    
     <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
