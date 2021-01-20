@@ -28,10 +28,10 @@ public class TestValeoReport extends BaseCase{
         valeoReport.getReportData("Kirkland & Ellis LLP", "2020", "High", "Senior Partner", "https://dev.reports.valeopartners.com/visual/test-report-automation");
     }
 
-//    @Test(priority = 4)
-//    public void matchDataofExcel() throws InterruptedException, IOException {
-//        logger = extent.createTest("Match the number of result in report with the Excel sheet");
-//        ValeoReport valeoReport = new ValeoReport(driver, logger);
-//        valeoReport.matchExcelData("Kirkland & Ellis LLP", "2020", "High", "Senior Partner", "https://dev.reports.valeopartners.com/visual/test-report-automation", "/home/addweb/Downloads", "/home/addweb/Downloads/Rates by Firm - Detail.xlsx", "Valeo Reports");
-//    }
+    @Test(priority = 4)
+    public void matchDataofExcel() throws InterruptedException, IOException {
+        logger = extent.createTest("Match the number of result in report with the Excel sheet");
+        ValeoReport valeoReport = new ValeoReport(driver, logger);
+        valeoReport.matchExcelData("Kirkland & Ellis LLP", "2020", "High", "Senior Partner", "https://dev.reports.valeopartners.com/visual/test-report-automation", "/home/addweb/IdeaProjects/valeopartnes-automation", "Valeo Reports");
+    }
 }

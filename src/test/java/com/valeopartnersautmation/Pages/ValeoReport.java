@@ -135,7 +135,7 @@ public class ValeoReport {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
         Thread.sleep(2000);
-        actionClass.entirePageScreenshot("Login");
+        actionClass.captureScreen("Login");
     }
 
     public void checkGraph(String graphURL) throws InterruptedException, IOException {
@@ -145,14 +145,15 @@ public class ValeoReport {
         Thread.sleep(5000);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
-        Boolean isGraph = driver.findElement(By.xpath("//*[@id=\"block-visualchartdisplay\"]/div[2]/div")).isDisplayed();
-        if (isGraph = true) {
-            extentTest.log(Status.PASS, "Graph is displayed");
-            System.out.println("Graph is displayed");
+        String  contains = driver.findElement(By.xpath("//*[@id=\"container1\"]")).getText();
+        if (contains.contains("No results found. Need help with a search? Please contact Valeo Help Desk at "))
+        {
+            extentTest.log(Status.FAIL, "Graph is not displayed for URL: "+graphURL);
+            System.out.println("Graph is not displayed");
             actionClass.entirePageScreenshot("Graph Check");
         } else {
-            extentTest.log(Status.FAIL, "Graph is not displayed");
-            System.out.println("Graph not displayed");
+            extentTest.log(Status.PASS, "Graph is displayed for URL: "+graphURL);
+            System.out.println("Graph is displayed");
             Thread.sleep(2000);
             actionClass.entirePageScreenshot("Graph Full Page SS");
         }
@@ -285,7 +286,7 @@ public class ValeoReport {
         }
     }
 
-    public File matchExcelData(String Firm, String rate_year, String rate_selection, String position, String graphURL, String dirPath, String filePath, String sheetName) throws InterruptedException, IOException {
+    public File matchExcelData(String Firm, String rate_year, String rate_selection, String position, String graphURL, String dirPath, String sheetName) throws InterruptedException, IOException {
         ActionClass actionClass = new ActionClass(this.driver, extentTest);
         Thread.sleep(2000);
         driver.get("https://dev.reports.valeopartners.com/rates/report");
@@ -310,6 +311,7 @@ public class ValeoReport {
         System.out.println("selectposition");
         actionClass.clickOnObject(this.SearchBtn);
         Thread.sleep(3000);
+        actionClass.captureScreen("Result SS");
         //get number of results
         String sentence = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[2]")).getText();
         String[] sentence2 = sentence.split(" ");
@@ -338,7 +340,7 @@ public class ValeoReport {
         XSSFWorkbook workbook = null;
         XSSFRow row = null;
         XSSFCell cell = null;
-        String xlFilePath;
+//        String xlFilePath;
         fis = new FileInputStream(lastModifiedFile);
         workbook = new  XSSFWorkbook(fis);
         XSSFSheet sheet = workbook.getSheet(sheetName);
