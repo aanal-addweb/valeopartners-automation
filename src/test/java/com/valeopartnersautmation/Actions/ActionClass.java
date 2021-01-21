@@ -218,7 +218,8 @@ public class ActionClass {
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
         Date date = new Date();
         String datetextName = dateFormat.format(date);
-        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
+//        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
+        String screenshotPath = System.getProperty("user.dir") + "/test-output/" +testcaseName + "_"+datetextName + ".png" ;
         TakesScreenshot scrShot = ((TakesScreenshot) driver);
         File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
         File DestFile = new File(screenshotPath);
@@ -230,7 +231,8 @@ public class ActionClass {
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
         Date date = new Date();
         String datetextName = dateFormat.format(date);
-        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
+//        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
+        String screenshotPath = System.getProperty("user.dir") + "/test-output/" +testcaseName + "_"+datetextName + ".png" ;
         Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
         try {
             test.addScreenCaptureFromPath(screenshotPath);
