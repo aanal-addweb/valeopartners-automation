@@ -33,6 +33,6 @@ public class TestValeoReport extends BaseCase{
         logger = extent.createTest("Match the number of result in report with the Excel sheet");
         ValeoReport valeoReport = new ValeoReport(driver, logger);
 //        valeoReport.matchExcelData("Kirkland & Ellis LLP", "2020", "High", "Senior Partner", "https://dev.reports.valeopartners.com/visual/test-report-automation", "https://jenkins.addwebprojects.com/view/automation/job/valeopartners-automation-aanal-repo/ws", "Valeo Reports");
-        valeoReport.matchExcelData("Kirkland & Ellis LLP", "2020", "High", "Senior Partner", "https://dev.reports.valeopartners.com/visual/test-report-automation", "/var/lib/jenkins/workspace/valeopartners-automation/Rates by Firm - Detail.xlsx", "Valeo Reports");
+        valeoReport.matchExcelData("Kirkland & Ellis LLP", "2020", "High", "Senior Partner", "https://dev.reports.valeopartners.com/visual/test-report-automation", "/var/lib/jenkins/workspace/valeopartners-automation-aanal-repo/Rates by Firm - Detail.xlsx", "Valeo Reports");
     }
 }
