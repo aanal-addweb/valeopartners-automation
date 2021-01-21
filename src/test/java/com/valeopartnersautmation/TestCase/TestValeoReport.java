@@ -32,7 +32,6 @@ public class TestValeoReport extends BaseCase{
     public void matchDataofExcel() throws InterruptedException, IOException {
         logger = extent.createTest("Match the number of result in report with the Excel sheet");
         ValeoReport valeoReport = new ValeoReport(driver, logger);
-//        valeoReport.matchExcelData("Kirkland & Ellis LLP", "2020", "High", "Senior Partner", "https://dev.reports.valeopartners.com/visual/test-report-automation", System.getProperty("user.dir")+"/Rates by Firm - Detail.xlsx", "Valeo Reports");
         valeoReport.matchExcelData("Kirkland & Ellis LLP", "2020", "High", "Senior Partner", "https://dev.reports.valeopartners.com/visual/test-report-automation", System.getProperty("user.dir"), "Valeo Reports");
     }
 }

@@ -318,7 +318,7 @@ public class ValeoReport {
         String result1= sentence2[5].trim();
         System.out.println(result1);
 
-//      export excel and get number of result
+//      export excel and get number of rows
         actionClass.clickOnObject(ExportExcel);
         Thread.sleep(3000);
         driver.switchTo().activeElement();
@@ -340,10 +340,7 @@ public class ValeoReport {
         XSSFWorkbook workbook = null;
         XSSFRow row = null;
         XSSFCell cell = null;
-//        String xlFilePath;
         System.out.println(lastModifiedFile);
-        fis = new FileInputStream(lastModifiedFile);
-//        System.out.println(dirPath);
         fis = new FileInputStream(lastModifiedFile);
         workbook = new  XSSFWorkbook(fis);
         XSSFSheet sheet = workbook.getSheet("Valeo Reports");
