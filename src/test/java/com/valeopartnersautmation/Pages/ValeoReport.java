@@ -14,7 +14,6 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 import java.awt.*;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
@@ -286,7 +285,7 @@ public class ValeoReport {
         }
     }
 
-    public File matchExcelData(String Firm, String rate_year, String rate_selection, String position, String graphURL, String dirPath, String sheetName) throws InterruptedException, IOException {
+    public void matchExcelData(String Firm, String rate_year, String rate_selection, String position, String graphURL, String dirPath, String sheetName) throws InterruptedException, IOException {
         ActionClass actionClass = new ActionClass(this.driver, extentTest);
         Thread.sleep(2000);
         driver.get("https://dev.reports.valeopartners.com/rates/report");
@@ -325,30 +324,31 @@ public class ValeoReport {
         Thread.sleep(5000);
         driver.findElement(By.xpath("/html/body/div[6]/div[3]/div")).click();
         Thread.sleep(3000);
-        File dir = new File(dirPath);
-        File[] files = dir.listFiles();
-        if (files == null || files.length == 0) {
-            return null;
-        }
-        File lastModifiedFile = files[0];
-        for (int i = 1; i < files.length; i++) {
-            if (lastModifiedFile.lastModified() < files[i].lastModified()) {
-                lastModifiedFile = files[i];
-            }
-        }
+//        File dir = new File(dirPath);
+//        File[] files = dir.listFiles();
+//        if (files == null || files.length == 0) {
+//            return null;
+//        }
+//        File lastModifiedFile = files[0];
+//        for (int i = 1; i < files.length; i++) {
+//            if (lastModifiedFile.lastModified() < files[i].lastModified()) {
+//                lastModifiedFile = files[i];
+//            }
+//        }
         FileInputStream fis = null;
         XSSFWorkbook workbook = null;
         XSSFRow row = null;
         XSSFCell cell = null;
 //        String xlFilePath;
-        System.out.println(lastModifiedFile);
-        fis = new FileInputStream(lastModifiedFile);
+//        System.out.println(lastModifiedFile);
+//        fis = new FileInputStream(lastModifiedFile);
+        fis = new FileInputStream(dirPath);
         workbook = new  XSSFWorkbook(fis);
         XSSFSheet sheet = workbook.getSheet("Valeo Reports");
         int rowCount = sheet.getLastRowNum();
         String result2 =String.valueOf(rowCount);
         System.out.println(result2);
         actionClass.CompareString(result1, result2);//Compare Number of displayed result with exported excel sheet
-        return lastModifiedFile;
+//        return lastModifiedFile;
     }
 }
