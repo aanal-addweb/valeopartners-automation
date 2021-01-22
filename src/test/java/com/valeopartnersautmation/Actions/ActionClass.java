@@ -2,6 +2,7 @@ package com.valeopartnersautmation.Actions;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import ru.yandex.qatools.ashot.AShot;
@@ -218,21 +219,20 @@ public class ActionClass {
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
         Date date = new Date();
         String datetextName = dateFormat.format(date);
-//        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
-        String screenshotPath = System.getProperty("user.dir") + "/test-output/" +testcaseName + "_"+datetextName + ".png" ;
+        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
         TakesScreenshot scrShot = ((TakesScreenshot) driver);
         File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
         File DestFile = new File(screenshotPath);
         FileUtils.copyFile(SrcFile, DestFile);
-        test.addScreenCaptureFromPath(screenshotPath);
+//        test.addScreenCaptureFromPath(screenshotPath);
+        test.addScreenCaptureFromPath("/var/lib/jenkins/jobs/valeopartners-automation-aanal-repo/workspace");
     }
 
     public void entirePageScreenshot(String testcaseName) throws IOException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
         Date date = new Date();
         String datetextName = dateFormat.format(date);
-//        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
-        String screenshotPath = System.getProperty("user.dir") + "/test-output/" +testcaseName + "_"+datetextName + ".png" ;
+        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
         Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
         try {
             test.addScreenCaptureFromPath(screenshotPath);

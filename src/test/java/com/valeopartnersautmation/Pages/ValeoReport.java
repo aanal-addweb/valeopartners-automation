@@ -2,6 +2,7 @@ package com.valeopartnersautmation.Pages;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.valeopartnersautmation.Actions.ActionClass;
 import com.valeopartnersautmation.Actions.VerificationClass;
 import org.apache.poi.xssf.usermodel.XSSFCell;
