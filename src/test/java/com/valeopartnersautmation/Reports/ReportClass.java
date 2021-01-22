@@ -17,7 +17,6 @@ public class ReportClass {
     public static ExtentHtmlReporter htmlReporter;
     public static ExtentReports extent;
     public static ExtentTest logger;
-    public static ExtentTest test;
 
     @BeforeSuite
     public void initReport() throws SQLException
@@ -40,10 +39,5 @@ public class ReportClass {
         extent.flush();
     }
 
-    public static Object screenCapture(String logdetails, String imagepath) throws IOException {
-// report with snapshot
-        test.log(Status.INFO, logdetails, MediaEntityBuilder.createScreenCaptureFromPath(imagepath).build());
-        return test;
-    }
 }
 

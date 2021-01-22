@@ -1,6 +1,7 @@
 package com.valeopartnersautmation.Actions;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.apache.commons.io.FileUtils;
@@ -224,8 +225,7 @@ public class ActionClass {
         File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
         File DestFile = new File(screenshotPath);
         FileUtils.copyFile(SrcFile, DestFile);
-//        test.addScreenCaptureFromPath(screenshotPath);
-        test.addScreenCaptureFromPath("/var/lib/jenkins/jobs/valeopartners-automation-aanal-repo/workspace");
+        test.addScreenCaptureFromPath(screenshotPath);
     }
 
     public void entirePageScreenshot(String testcaseName) throws IOException {
@@ -240,6 +240,11 @@ public class ActionClass {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static Object screenCapture(String logdetails, String imgpath) throws IOException {
+// report with snapshot
+        test.log(Status.INFO, logdetails, MediaEntityBuilder.createScreenCaptureFromPath(imgpath).build());
+        return test;
     }
 }
 
