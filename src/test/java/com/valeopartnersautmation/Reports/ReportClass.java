@@ -21,7 +21,7 @@ public class ReportClass {
     @BeforeSuite
     public void initReport() throws SQLException
     {
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/Valeo_ScriptExecution_Report.html");
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/screenshot/Valeo_ScriptExecution_Report.html");
         extent = new ExtentReports ();
         extent.attachReporter(htmlReporter);
         extent.setSystemInfo("Host Name", "Valeo");
@@ -38,6 +38,9 @@ public class ReportClass {
     public void tearDown() throws IOException {
         extent.flush();
     }
+
+
+//    public static Object screencapture(String )
 
 }
 

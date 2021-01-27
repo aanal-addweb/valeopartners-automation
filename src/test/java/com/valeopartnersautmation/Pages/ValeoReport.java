@@ -20,7 +20,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-import static com.valeopartnersautmation.Actions.ActionClass.screenCapture;
+//import static com.valeopartnersautmation.Actions.ActionClass.screenCapture;
 import static com.valeopartnersautmation.Constants.CommonVars.*;
 
 public class ValeoReport {

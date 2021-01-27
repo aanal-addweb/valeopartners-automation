@@ -69,6 +69,7 @@ public class ActionClass {
             }
         }
     }
+
     public void CompareList(ArrayList<Integer> listNames, ArrayList<Integer> listNames1)   {
         try {
             if(listNames.equals(listNames1)==true)
@@ -89,6 +90,7 @@ public class ActionClass {
             test.log(Status.FAIL,e.getMessage());
         }
     }
+
     public void CompareListandstring(String s, String s1)
     {
         try {
@@ -152,7 +154,6 @@ public class ActionClass {
             test.log(Status.FAIL,e.getMessage());
         }
     }
-
     public void setValueinPortalField(WebElement element) {
 
         try{
@@ -216,11 +217,17 @@ public class ActionClass {
             test.log(Status.FAIL,e.getMessage());
         }
     }
+
+
+
+
     public static void captureScreen(String testcaseName) throws IOException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
         Date date = new Date();
         String datetextName = dateFormat.format(date);
         String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
+        //Need to add relative path here:
+//        String screenshotPath = System.getProperty("user.dir") + "./screenshot/report" +testcaseName+".png ";
         TakesScreenshot scrShot = ((TakesScreenshot) driver);
         File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
         File DestFile = new File(screenshotPath);
@@ -241,10 +248,14 @@ public class ActionClass {
             e.printStackTrace();
         }
     }
-    public static Object screenCapture(String logdetails, String imgpath) throws IOException {
-// report with snapshot
-        test.log(Status.INFO, logdetails, MediaEntityBuilder.createScreenCaptureFromPath(imgpath).build());
-        return test;
-    }
+
+//    public void passFailscreenshot(String name){
+//        String screenshotName=
+//    }
+//    public static Object captureScreen2(String logdetails, String imgpath) throws IOException {
+//// report with snapshot
+//        test.log(Status.INFO, logdetails, MediaEntityBuilder.createScreenCaptureFromPath(imgpath).build());
+//        return test;
+//    }
 }
 
