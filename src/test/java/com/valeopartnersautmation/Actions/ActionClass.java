@@ -231,7 +231,7 @@ public class ActionClass {
         TakesScreenshot scrShot = ((TakesScreenshot) driver);
         File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
         File DestFile = new File(screenshotPath);
-        FileUtils.copyFile(SrcFile, DestFile);
+//        FileUtils.copyFile(SrcFile, DestFile);
         test.addScreenCaptureFromPath(screenshotPath);
     }
 
