@@ -21,6 +21,7 @@ import java.util.Date;
 public class ActionClass {
     public static WebDriver driver;
     public static ExtentTest test;
+    public String screenshotPath;
 
     public ActionClass(WebDriver driver, ExtentTest test)
     {
@@ -221,41 +222,49 @@ public class ActionClass {
 
 
 
-    public static void captureScreen(String testcaseName) throws IOException {
+    public void captureScreen(String testcaseName) throws IOException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
         Date date = new Date();
         String datetextName = dateFormat.format(date);
         String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
         //Need to add relative path here:
-//        String screenshotPath = System.getProperty("user.dir") + "./screenshot/report" +testcaseName+".png ";
+//        String screenshotPath = "./test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
         TakesScreenshot scrShot = ((TakesScreenshot) driver);
         File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
         File DestFile = new File(screenshotPath);
-//        FileUtils.copyFile(SrcFile, DestFile);
+        FileUtils.copyFile(SrcFile, DestFile);
         test.addScreenCaptureFromPath(screenshotPath);
     }
 
-    public void entirePageScreenshot(String testcaseName) throws IOException {
+//    public void entirePageScreenshot(String testcaseName) throws IOException {
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
+//        Date date = new Date();
+//        String datetextName = dateFormat.format(date);
+//        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
+//        Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
+//        try {
+//            test.addScreenCaptureFromPath(screenshotPath);
+//            ImageIO.write(screenshot.getImage(),"PNG",new File(screenshotPath));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public Object screenCapture(String testcaseName) throws IOException {
+    // report with snapshot
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
         Date date = new Date();
         String datetextName = dateFormat.format(date);
         String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
-        Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
-        try {
-            test.addScreenCaptureFromPath(screenshotPath);
-            ImageIO.write(screenshot.getImage(),"PNG",new File(screenshotPath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //Need to add relative path here:
+//        String screenshotPath = "./test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
+        TakesScreenshot scrShot = ((TakesScreenshot) driver);
+        File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+        File DestFile = new File(screenshotPath);
+        FileUtils.copyFile(SrcFile, DestFile);
+        System.out.println(screenshotPath);
+        test.log(Status.INFO, testcaseName, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+        return test;
     }
-
-//    public void passFailscreenshot(String name){
-//        String screenshotName=
-//    }
-//    public static Object captureScreen2(String logdetails, String imgpath) throws IOException {
-//// report with snapshot
-//        test.log(Status.INFO, logdetails, MediaEntityBuilder.createScreenCaptureFromPath(imgpath).build());
-//        return test;
-//    }
 }
 

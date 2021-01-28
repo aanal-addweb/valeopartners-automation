@@ -137,156 +137,157 @@ public class ValeoReport {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
         Thread.sleep(2000);
-        actionClass.captureScreen("Login");
+//        actionClass.captureScreen("Login");
+        actionClass.screenCapture("Login1");
     }
 
-    public void checkGraph(String graphURL) throws InterruptedException, IOException {
-        ActionClass actionClass = new ActionClass(this.driver, extentTest);
-        Thread.sleep(2000);
-        driver.get(graphURL);
-        Thread.sleep(5000);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
-        String  contains = driver.findElement(By.xpath("//*[@id=\"container1\"]")).getText();
-        if (contains.contains("No results found. Need help with a search? Please contact Valeo Help Desk at "))
-        {
-            extentTest.log(Status.FAIL, "Graph is not displayed for URL: "+graphURL);
-            System.out.println("Graph is not displayed");
-            actionClass.entirePageScreenshot("Graph Check");
-        } else {
-            extentTest.log(Status.PASS, "Graph is displayed for URL: "+graphURL);
-            System.out.println("Graph is displayed");
-            Thread.sleep(2000);
-            actionClass.entirePageScreenshot("Graph Full Page SS");
-        }
-    }
-
-    public void getReportData(String Firm, String rate_year, String rate_selection, String position, String graphURL) throws InterruptedException, IOException, AWTException {
-        //Report
-        ActionClass actionClass = new ActionClass(this.driver, extentTest);
-        Thread.sleep(2000);
-        driver.get("https://dev.reports.valeopartners.com/rates/report");
-        Thread.sleep(3000);
-        actionClass.setValueinTextbox(this.FirmField,Firm);
-        actionClass.clickOnObject(this.Optionselect);
-        Thread.sleep(2000);
-        actionClass.clickOnObject(this.Position);
-        Thread.sleep(2000);
-        actionClass.clickOnObject(this.SelectPosition);
-        Thread.sleep(2000);
-        System.out.println("selectposition");
-        JavascriptExecutor jsetaskscore = (JavascriptExecutor) driver;
-        jsetaskscore.executeScript("scrollBy(0,350)");
-        actionClass.clickOnObject(this.FromYear);
-        actionClass.setValueinTextbox(this.Searchbox,rate_year);
-        actionClass.clickOnObject(this.FromYearSelect);
-        System.out.println("selectposition1");
-        Thread.sleep(2000);
-        actionClass.setValueinTextbox(this.ToyearSearch,rate_year);
-        actionClass.clickOnObject(this.Toyearselect);
-        System.out.println("selectposition");
-        actionClass.clickOnObject(this.SearchBtn);
-        Thread.sleep(3000);
-//        Robot robot = new Robot();
-//        System.out.println("About to zoom out");
-//        for (int i = 0; i < 4; i++) {
-//            robot.keyPress(KeyEvent.VK_CONTROL);
-//            robot.keyPress(KeyEvent.VK_SUBTRACT);
-//            robot.keyRelease(KeyEvent.VK_SUBTRACT);
-//            robot.keyRelease(KeyEvent.VK_CONTROL);
+//    public void checkGraph(String graphURL) throws InterruptedException, IOException {
+//        ActionClass actionClass = new ActionClass(this.driver, extentTest);
+//        Thread.sleep(2000);
+//        driver.get(graphURL);
+//        Thread.sleep(5000);
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
+//        String  contains = driver.findElement(By.xpath("//*[@id=\"container1\"]")).getText();
+//        if (contains.contains("No results found. Need help with a search? Please contact Valeo Help Desk at "))
+//        {
+//            extentTest.log(Status.FAIL, "Graph is not displayed for URL: "+graphURL);
+//            System.out.println("Graph is not displayed");
+//            actionClass.entirePageScreenshot("Graph Check");
+//        } else {
+//            extentTest.log(Status.PASS, "Graph is displayed for URL: "+graphURL);
+//            System.out.println("Graph is displayed");
+//            Thread.sleep(2000);
+//            actionClass.entirePageScreenshot("Graph Full Page SS");
 //        }
-        Thread.sleep(5000);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
-        Thread.sleep(2000);
-        actionClass.entirePageScreenshot("Report Full Page SS");
-//        System.out.println("About to zoom in");
-//        for (int i = 0; i < 4; i++) {
-//            robot.keyPress(KeyEvent.VK_CONTROL);
-//            robot.keyPress(KeyEvent.VK_ADD);
-//            robot.keyRelease(KeyEvent.VK_ADD);
-//            robot.keyRelease(KeyEvent.VK_CONTROL);
+//    }
+
+//    public void getReportData(String Firm, String rate_year, String rate_selection, String position, String graphURL) throws InterruptedException, IOException, AWTException {
+//        //Report
+//        ActionClass actionClass = new ActionClass(this.driver, extentTest);
+//        Thread.sleep(2000);
+//        driver.get("https://dev.reports.valeopartners.com/rates/report");
+//        Thread.sleep(3000);
+//        actionClass.setValueinTextbox(this.FirmField,Firm);
+//        actionClass.clickOnObject(this.Optionselect);
+//        Thread.sleep(2000);
+//        actionClass.clickOnObject(this.Position);
+//        Thread.sleep(2000);
+//        actionClass.clickOnObject(this.SelectPosition);
+//        Thread.sleep(2000);
+//        System.out.println("selectposition");
+//        JavascriptExecutor jsetaskscore = (JavascriptExecutor) driver;
+//        jsetaskscore.executeScript("scrollBy(0,350)");
+//        actionClass.clickOnObject(this.FromYear);
+//        actionClass.setValueinTextbox(this.Searchbox,rate_year);
+//        actionClass.clickOnObject(this.FromYearSelect);
+//        System.out.println("selectposition1");
+//        Thread.sleep(2000);
+//        actionClass.setValueinTextbox(this.ToyearSearch,rate_year);
+//        actionClass.clickOnObject(this.Toyearselect);
+//        System.out.println("selectposition");
+//        actionClass.clickOnObject(this.SearchBtn);
+//        Thread.sleep(3000);
+////        Robot robot = new Robot();
+////        System.out.println("About to zoom out");
+////        for (int i = 0; i < 4; i++) {
+////            robot.keyPress(KeyEvent.VK_CONTROL);
+////            robot.keyPress(KeyEvent.VK_SUBTRACT);
+////            robot.keyRelease(KeyEvent.VK_SUBTRACT);
+////            robot.keyRelease(KeyEvent.VK_CONTROL);
+////        }
+//        Thread.sleep(5000);
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
+//        Thread.sleep(2000);
+//        actionClass.entirePageScreenshot("Report Full Page SS");
+////        System.out.println("About to zoom in");
+////        for (int i = 0; i < 4; i++) {
+////            robot.keyPress(KeyEvent.VK_CONTROL);
+////            robot.keyPress(KeyEvent.VK_ADD);
+////            robot.keyRelease(KeyEvent.VK_ADD);
+////            robot.keyRelease(KeyEvent.VK_CONTROL);
+////        }
+//        Thread.sleep(5000);
+//
+//        POJO pojo = new POJO();
+//        String graduation_year = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[4]/table/tbody/tr[1]/td[12]")).getText();
+//        graduation_year.trim();
+//        if(graduation_year.isEmpty()){
+//            String rate_selection1 = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[4]/table/tbody/tr[1]/td[2]")).getText();
+//            System.out.println(rate_selection1);
+//            pojo.setRate_selection(rate_selection1);
+//            pojo.setPosition(position);
 //        }
-        Thread.sleep(5000);
-
-        POJO pojo = new POJO();
-        String graduation_year = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[4]/table/tbody/tr[1]/td[12]")).getText();
-        graduation_year.trim();
-        if(graduation_year.isEmpty()){
-            String rate_selection1 = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[4]/table/tbody/tr[1]/td[2]")).getText();
-            System.out.println(rate_selection1);
-            pojo.setRate_selection(rate_selection1);
-            pojo.setPosition(position);
-        }
-        else {
-            int year= Integer.parseInt(rate_year) - Integer.parseInt(graduation_year) + 1;
-            if(year>=25){
-                pojo.setPosition(position);
-            }
-            else {
-                pojo.setPosition("Partner");
-            }
-        }
-        String actual_rate1 = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[4]/table/tbody/tr[1]/td[16]")).getText();
-        System.out.println(actual_rate1);
-        pojo.setRate(actual_rate1);
-        String report_rate_year = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[4]/table/tbody/tr[1]/td[19]")).getText();
-        System.out.println(report_rate_year);
-        pojo.setReportrateyear(report_rate_year);
-
-//      Graph
-        driver.get(graphURL);
-        Thread.sleep(3000);
-        Boolean isGraph = driver.findElement(By.xpath("//*[@id=\"block-visualchartdisplay\"]/div[2]/div")).isDisplayed();
-        if (isGraph = true) {
-            extentTest.log(Status.PASS, "Graph is displayed");
-            System.out.println("Graph is displayed");
-            String rate_selection2 = driver.findElement(By.xpath("//*[@id=\"highcharts-data-table\"]/tbody/tr/td[1]")).getText();
-            System.out.println(rate_selection2);
-
-            if(pojo.getRate_selection().contains(rate_selection)  && rate_selection2.contains(rate_selection)){
-                System.out.println("Rates selection are compared and are correct");
-                extentTest.log(Status.PASS, "Rates selection are compared and are correct");
-            }
-            else{
-                System.out.println("Rates selection are compared and are not correct");
-                extentTest.log(Status.FAIL, "Rates selection are compared and are not correct");
-            }
-
-            List<WebElement> list = driver.findElements(By.xpath("//*[@id=\"highcharts-data-table\"]/thead/tr/th"));
-            int recordSize = list.size();
-
-            //Graph value check comparing with the Listing page
-            for (int i = 2; i < recordSize; i++) {
-                String head_name = driver.findElement(By.xpath("//*[@id=\"highcharts-data-table\"]/thead/tr/th[" + i + "]")).getText();
-                System.out.println("Headname:" + head_name);
-                System.out.println("pojo get postion:" + pojo.getPosition());
-
-                if (head_name.equals(pojo.getPosition())) {
-                    String actual_rate2 = driver.findElement(By.xpath("//*[@id=\"highcharts-data-table\"]/tbody/tr/td[" + i + "]")).getText();
-                    System.out.println(actual_rate2);
-                    String removeChars = actual_rate2;
-                    String removeCharss = removeChars.replace(",", "");
-                    if (pojo.getRate().contains(removeCharss)) {
-                        System.out.println("Rates are compared and are correct");
-                        extentTest.log(Status.PASS, "Rates are compared and are correct");
-                    } else {
-                        System.out.println("Rates are compared and are not correct");
-                        extentTest.log(Status.FAIL, "Rates are compared and are not correct");
-                    }
-                    break;
-                }
-            }
-            js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
-            actionClass.entirePageScreenshot("Graph is displayed");
-        }else {
-            extentTest.log(Status.FAIL, "Graph is not displayed");
-            System.out.println("Graph not displayed");
-            Thread.sleep(2000);
-            js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
-            actionClass.entirePageScreenshot("Graph not displayed SS");
-        }
-    }
+//        else {
+//            int year= Integer.parseInt(rate_year) - Integer.parseInt(graduation_year) + 1;
+//            if(year>=25){
+//                pojo.setPosition(position);
+//            }
+//            else {
+//                pojo.setPosition("Partner");
+//            }
+//        }
+//        String actual_rate1 = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[4]/table/tbody/tr[1]/td[16]")).getText();
+//        System.out.println(actual_rate1);
+//        pojo.setRate(actual_rate1);
+//        String report_rate_year = driver.findElement(By.xpath("//*[@id=\"block-valeo-classic-content\"]/div/div/div/div[4]/table/tbody/tr[1]/td[19]")).getText();
+//        System.out.println(report_rate_year);
+//        pojo.setReportrateyear(report_rate_year);
+//
+////      Graph
+//        driver.get(graphURL);
+//        Thread.sleep(3000);
+//        Boolean isGraph = driver.findElement(By.xpath("//*[@id=\"block-visualchartdisplay\"]/div[2]/div")).isDisplayed();
+//        if (isGraph = true) {
+//            extentTest.log(Status.PASS, "Graph is displayed");
+//            System.out.println("Graph is displayed");
+//            String rate_selection2 = driver.findElement(By.xpath("//*[@id=\"highcharts-data-table\"]/tbody/tr/td[1]")).getText();
+//            System.out.println(rate_selection2);
+//
+//            if(pojo.getRate_selection().contains(rate_selection)  && rate_selection2.contains(rate_selection)){
+//                System.out.println("Rates selection are compared and are correct");
+//                extentTest.log(Status.PASS, "Rates selection are compared and are correct");
+//            }
+//            else{
+//                System.out.println("Rates selection are compared and are not correct");
+//                extentTest.log(Status.FAIL, "Rates selection are compared and are not correct");
+//            }
+//
+//            List<WebElement> list = driver.findElements(By.xpath("//*[@id=\"highcharts-data-table\"]/thead/tr/th"));
+//            int recordSize = list.size();
+//
+//            //Graph value check comparing with the Listing page
+//            for (int i = 2; i < recordSize; i++) {
+//                String head_name = driver.findElement(By.xpath("//*[@id=\"highcharts-data-table\"]/thead/tr/th[" + i + "]")).getText();
+//                System.out.println("Headname:" + head_name);
+//                System.out.println("pojo get postion:" + pojo.getPosition());
+//
+//                if (head_name.equals(pojo.getPosition())) {
+//                    String actual_rate2 = driver.findElement(By.xpath("//*[@id=\"highcharts-data-table\"]/tbody/tr/td[" + i + "]")).getText();
+//                    System.out.println(actual_rate2);
+//                    String removeChars = actual_rate2;
+//                    String removeCharss = removeChars.replace(",", "");
+//                    if (pojo.getRate().contains(removeCharss)) {
+//                        System.out.println("Rates are compared and are correct");
+//                        extentTest.log(Status.PASS, "Rates are compared and are correct");
+//                    } else {
+//                        System.out.println("Rates are compared and are not correct");
+//                        extentTest.log(Status.FAIL, "Rates are compared and are not correct");
+//                    }
+//                    break;
+//                }
+//            }
+//            js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
+//            actionClass.entirePageScreenshot("Graph is displayed");
+//        }else {
+//            extentTest.log(Status.FAIL, "Graph is not displayed");
+//            System.out.println("Graph not displayed");
+//            Thread.sleep(2000);
+//            js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
+//            actionClass.entirePageScreenshot("Graph not displayed SS");
+//        }
+//    }
 
     public File matchExcelData(String Firm, String rate_year, String rate_selection, String position, String graphURL, String dirPath, String sheetName) throws InterruptedException, IOException {
         ActionClass actionClass = new ActionClass(this.driver, extentTest);
