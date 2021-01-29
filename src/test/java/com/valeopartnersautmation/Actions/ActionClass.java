@@ -11,6 +11,7 @@ import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
@@ -223,17 +224,21 @@ public class ActionClass {
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
         Date date = new Date();
         String datetextName = dateFormat.format(date);
-        String destinationFile = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
+//        File destinationFile = new File(System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png");
+        String destinationFile = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png";
+        System.out.println("destination file: "+destinationFile);
         Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
         String[] relatvePath = destinationFile.toString().split("/test-output");
+        System.out.println("relative path: "+relatvePath);
         screenshotPath = ".." + relatvePath[1];
-        try {
-            test.log(Status.INFO, testcaseName, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-//            test.addScreenCaptureFromPath(screenshotPath);
-            ImageIO.write(screenshot.getImage(),"PNG",new File(screenshotPath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println("screeshotpath: "+screenshotPath);
+//        try {
+//            ImageIO.write(screenshot.getImage(),"PNG",new File(screenshotPath));
+            ImageIO.write(screenshot.getImage(),"PNG",new File(destinationFile));
+//            test.log(Status.INFO, testcaseName, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public Object screenCapture(String testcaseName) throws IOException {

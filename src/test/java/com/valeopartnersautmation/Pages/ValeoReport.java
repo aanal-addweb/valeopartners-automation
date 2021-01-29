@@ -138,7 +138,6 @@ public class ValeoReport {
         js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
         Thread.sleep(2000);
         actionClass.screenCapture("Login_Page_SS");
-        actionClass.entirePageScreenshot("Login_Page_Full_SS");
     }
 
     public void checkGraph(String graphURL) throws InterruptedException, IOException {

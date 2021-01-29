@@ -22,18 +22,18 @@ public class TestValeoReport extends BaseCase{
         ValeoReport valeoReport = new ValeoReport(driver, logger);
         valeoReport.checkGraph("https://dev.reports.valeopartners.com/visual/test-report-automation-graph-not-displayed");
     }
-//
-    @Test(priority = 3)
-    public void reportCompareData() throws IOException, InterruptedException, AWTException {
-        logger = extent.createTest("Check if the graph values and report values are same or not");
-        ValeoReport valeoReport = new ValeoReport(driver, logger);
-        valeoReport.getReportData("Kirkland & Ellis LLP", "2020", "High", "Senior Partner", "https://dev.reports.valeopartners.com/visual/test-report-automation");
-    }
 
-    @Test(priority = 4)
-    public void matchDataofExcel() throws InterruptedException, IOException {
-        logger = extent.createTest("Match the number of result in report with the Excel sheet");
-        ValeoReport valeoReport = new ValeoReport(driver, logger);
-        valeoReport.matchExcelData("Kirkland & Ellis LLP", "2020", "High", "Senior Partner", "https://dev.reports.valeopartners.com/visual/test-report-automation", System.getProperty("user.dir"), "Valeo Reports");
-    }
+//    @Test(priority = 3)
+//    public void reportCompareData() throws IOException, InterruptedException, AWTException {
+//        logger = extent.createTest("Check if the graph values and report values are same or not");
+//        ValeoReport valeoReport = new ValeoReport(driver, logger);
+//        valeoReport.getReportData("Kirkland & Ellis LLP", "2020", "High", "Senior Partner", "https://dev.reports.valeopartners.com/visual/test-report-automation");
+//    }
+//
+//    @Test(priority = 4)
+//    public void matchDataofExcel() throws InterruptedException, IOException {
+//        logger = extent.createTest("Match the number of result in report with the Excel sheet");
+//        ValeoReport valeoReport = new ValeoReport(driver, logger);
+//        valeoReport.matchExcelData("Kirkland & Ellis LLP", "2020", "High", "Senior Partner", "https://dev.reports.valeopartners.com/visual/test-report-automation", System.getProperty("user.dir"), "Valeo Reports");
+//    }
 }
