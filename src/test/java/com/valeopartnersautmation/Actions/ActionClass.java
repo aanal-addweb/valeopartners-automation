@@ -219,42 +219,22 @@ public class ActionClass {
         }
     }
 
-
-
-
-    public void captureScreen(String testcaseName) throws IOException {
+    public void entirePageScreenshot(String testcaseName) throws IOException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
         Date date = new Date();
-        File sourceFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         String datetextName = dateFormat.format(date);
-        File destinationFile = new File(System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png");
-        FileUtils.copyFile(sourceFile,destinationFile);
+        String destinationFile = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
+        Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
         String[] relatvePath = destinationFile.toString().split("/test-output");
-        screenshotPath = ".\\" + relatvePath[1];
-        // String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
-        //Need to add relative path here:
-//        String screenshotPath = "./test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
-        // TakesScreenshot scrShot = ((TakesScreenshot) driver);
-        // File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
-        // File DestFile = new File(screenshotPath);
-        // FileUtils.copyFile(SrcFile, DestFile);
-        // test.addScreenCaptureFromPath(screenshotPath);
-
-    }
-
-//    public void entirePageScreenshot(String testcaseName) throws IOException {
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
-//        Date date = new Date();
-//        String datetextName = dateFormat.format(date);
-//        String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
-//        Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
-//        try {
+        screenshotPath = ".." + relatvePath[1];
+        try {
+            test.log(Status.INFO, testcaseName, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
 //            test.addScreenCaptureFromPath(screenshotPath);
-//            ImageIO.write(screenshot.getImage(),"PNG",new File(screenshotPath));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+            ImageIO.write(screenshot.getImage(),"PNG",new File(screenshotPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public Object screenCapture(String testcaseName) throws IOException {
     // report with snapshot
@@ -266,17 +246,8 @@ public class ActionClass {
         FileUtils.copyFile(sourceFile,destinationFile);
         String[] relatvePath = destinationFile.toString().split("/test-output");
         screenshotPath = ".." + relatvePath[1];
-//         String screenshotPath = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
-//         //Need to add relative path here:
-// //        String screenshotPath = "./test-output/screenshot/" +testcaseName + "_"+datetextName + ".png" ;
-//         TakesScreenshot scrShot = ((TakesScreenshot) driver);
-//         File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
-//         File DestFile = new File(screenshotPath);
-//         FileUtils.copyFile(SrcFile, DestFile);
-//         System.out.println(screenshotPath);
         test.log(Status.INFO, testcaseName, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
         return test;
-
     }
 }
 
