@@ -1,23 +1,28 @@
 package com.valeopartnersautmation.Actions;
 
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.*;
-import ru.yandex.qatools.ashot.AShot;
-import ru.yandex.qatools.ashot.Screenshot;
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+
+import javax.imageio.ImageIO;
+
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 public class ActionClass {
     public static WebDriver driver;
@@ -232,13 +237,12 @@ public class ActionClass {
         System.out.println("relative path: "+relatvePath);
         screenshotPath = ".." + relatvePath[1];
         System.out.println("screeshotpath: "+screenshotPath);
-//        try {
-//            ImageIO.write(screenshot.getImage(),"PNG",new File(screenshotPath));
-            ImageIO.write(screenshot.getImage(),"PNG",new File(destinationFile));
-//            test.log(Status.INFO, testcaseName, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+       try {
+           ImageIO.write(screenshot.getImage(),"PNG",new File(destinationFile));
+           test.log(Status.INFO, testcaseName, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
     }
 
     public Object screenCapture(String testcaseName) throws IOException {
