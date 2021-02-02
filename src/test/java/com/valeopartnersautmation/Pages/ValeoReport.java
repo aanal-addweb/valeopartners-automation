@@ -19,8 +19,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
-
-//import static com.valeopartnersautmation.Actions.ActionClass.screenCapture;
 import static com.valeopartnersautmation.Constants.CommonVars.*;
 
 public class ValeoReport {
@@ -115,7 +113,6 @@ public class ValeoReport {
             using = "/html/body/div[6]/div[11]/div/button")
     private WebElement ClickOnAccept;
 
-
     public ValeoReport(WebDriver driver, ExtentTest test){
         this.driver = driver;
         this.extentTest = test;
@@ -189,27 +186,12 @@ public class ValeoReport {
         System.out.println("selectposition");
         actionClass.clickOnObject(this.SearchBtn);
         Thread.sleep(3000);
-//        Robot robot = new Robot();
-//        System.out.println("About to zoom out");
-//        for (int i = 0; i < 4; i++) {
-//            robot.keyPress(KeyEvent.VK_CONTROL);
-//            robot.keyPress(KeyEvent.VK_SUBTRACT);
-//            robot.keyRelease(KeyEvent.VK_SUBTRACT);
-//            robot.keyRelease(KeyEvent.VK_CONTROL);
-//        }
         Thread.sleep(5000);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
         Thread.sleep(2000);
         actionClass.screenCapture("Report_Page_SS");
         actionClass.entirePageScreenshot("Report_Page_Full_SS");
-//        System.out.println("About to zoom in");
-//        for (int i = 0; i < 4; i++) {
-//            robot.keyPress(KeyEvent.VK_CONTROL);
-//            robot.keyPress(KeyEvent.VK_ADD);
-//            robot.keyRelease(KeyEvent.VK_ADD);
-//            robot.keyRelease(KeyEvent.VK_CONTROL);
-//        }
         Thread.sleep(5000);
 
         POJO pojo = new POJO();

@@ -32,7 +32,6 @@ public class ReportClass {
         htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
         htmlReporter.config().setTheme(Theme.STANDARD);
     }
-
     @AfterSuite
     public void tearDown() throws IOException {
         extent.flush();

@@ -162,7 +162,6 @@ public class ActionClass {
         }
     }
     public void setValueinPortalField(WebElement element) {
-
         try{
             if(element.isDisplayed()){
                 element.click();
@@ -229,7 +228,6 @@ public class ActionClass {
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_MM_SS");
         Date date = new Date();
         String datetextName = dateFormat.format(date);
-//        File destinationFile = new File(System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png");
         String destinationFile = System.getProperty("user.dir") + "/test-output/screenshot/" +testcaseName + "_"+datetextName + ".png";
         System.out.println("destination file: "+destinationFile);
         Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);

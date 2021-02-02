@@ -18,7 +18,6 @@ public class BaseCase extends ReportClass {
 //        CommonVars constantVars = new CommonVars();
 //        driver.get(constantVars.url);
 //        driver.manage().window().maximize();
-
 //        headless
         System.setProperty("Webdriver.chrome.driver", System.getProperty("user.dir") + "chromedriver");
         ChromeOptions options = new ChromeOptions();
