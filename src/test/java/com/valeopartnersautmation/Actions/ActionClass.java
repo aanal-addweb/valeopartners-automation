@@ -234,11 +234,17 @@ public class ActionClass {
         System.out.println("screeshotpath: "+screenshotPath);
 //        try {
 //            ImageIO.write(screenshot.getImage(),"PNG",new File(screenshotPath));
-            ImageIO.write(screenshot.getImage(),"PNG",new File(destinationFile));
+//            ImageIO.write(screenshot.getImage(),"PNG",new File(destinationFile));
 //            test.log(Status.INFO, testcaseName, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+        try {
+            ImageIO.write(screenshot.getImage(),"PNG",new File(destinationFile));
+            test.log(Status.INFO, testcaseName, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Object screenCapture(String testcaseName) throws IOException {
