@@ -27,7 +27,6 @@ public class ReportClass {
         extent.setSystemInfo("Host Name", "Valeo");
         extent.setSystemInfo("Environment", "Valeo__Automation__Reports");
         extent.setSystemInfo("User Name", "Aanal");
-
         htmlReporter.config().setDocumentTitle("Valeo Test_cases");
         htmlReporter.config().setReportName("Valeo Test_Report");
         htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
@@ -38,9 +37,5 @@ public class ReportClass {
     public void tearDown() throws IOException {
         extent.flush();
     }
-
-
-//    public static Object screencapture(String )
-
 }
 
