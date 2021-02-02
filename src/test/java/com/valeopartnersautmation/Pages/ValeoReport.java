@@ -149,13 +149,13 @@ public class ValeoReport {
         {
             extentTest.log(Status.FAIL, "Graph is not displayed for URL: "+graphURL);
             System.out.println("Graph is not displayed");
-            actionClass.screenCapture("Graph_Displayed");
+//            actionClass.screenCapture("Graph_Displayed");
             actionClass.entirePageScreenshot("Graph_Displayed_Full_SS");
         } else {
             extentTest.log(Status.PASS, "Graph is displayed for URL: "+graphURL);
             System.out.println("Graph is displayed");
             Thread.sleep(2000);
-            actionClass.screenCapture("Graph_Not_Displayed");
+//            actionClass.screenCapture("Graph_Not_Displayed");
             actionClass.entirePageScreenshot("Graph_Not_Displayed_Full_SS");
         }
     }
@@ -190,7 +190,7 @@ public class ValeoReport {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
         Thread.sleep(2000);
-        actionClass.screenCapture("Report_Page_SS");
+//        actionClass.screenCapture("Report_Page_SS");
         actionClass.entirePageScreenshot("Report_Page_Full_SS");
         Thread.sleep(5000);
 
@@ -263,14 +263,14 @@ public class ValeoReport {
                 }
             }
             js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
-            actionClass.screenCapture("Graph_Page_SS");
+//            actionClass.screenCapture("Graph_Page_SS");
             actionClass.entirePageScreenshot("Graph_Page_Full_SS");
         }else {
             extentTest.log(Status.FAIL, "Graph is not displayed");
             System.out.println("Graph not displayed");
             Thread.sleep(2000);
             js.executeScript("document.head.appendChild(document.createElement(\"style\")).innerHTML = \"#toolbar-administration {display: none !important; }\"");
-            actionClass.screenCapture("Graph_Page_SS_1");
+//            actionClass.screenCapture("Graph_Page_SS_1");
             actionClass.entirePageScreenshot("Graph_Page_Full_SS_1");
         }
     }
